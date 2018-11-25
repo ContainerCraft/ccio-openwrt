@@ -166,3 +166,11 @@ EOF
 ovs-vsctl add-port lan ens6
 ````
 
+# CREDITS:
+  - https://github.com/mikma/lxd-openwrt
+  - https://github.com/melato/openwrt-lxd 
+  - http://www.gnuton.org/blog/2016/02/lxc-on-openwrt/
+  - https://forum.archive.openwrt.org/viewtopic.php?id=67358
+  - https://discuss.linuxcontainers.org/t/run-openwrt-inside-lxd/1469
+  - https://www.reddit.com/r/openwrt/comments/7c9kkr/openwrtlede_in_docker_x86_64/
+  - https://discuss.linuxcontainers.org/t/lxd-success-on-openwrt-privileged-containers-but-problems-with-unprivileged/1729
