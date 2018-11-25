@@ -168,6 +168,7 @@ ovs-vsctl add-port lan ens6
 
 # CREDITS:
   - https://github.com/mikma/lxd-openwrt
+  - https://github.com/DavBfr/lxd-openwrt
   - https://github.com/melato/openwrt-lxd 
   - http://www.gnuton.org/blog/2016/02/lxc-on-openwrt/
   - https://forum.archive.openwrt.org/viewtopic.php?id=67358
