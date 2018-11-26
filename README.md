@@ -131,13 +131,7 @@ lxc profile device add openwrt eth1 nic nictype=bridged parent=lan
 
 #### 13. Launch Gateway
 ````sh
-lxc launch bcio:openwrt gateway -p openwrt
-````
-
-#### 14. Watch container for eth0 & br-lan ip initialization
-###### "ctrl + c" to exit "watch" cmd
-````sh
-watch -c lxc list
+lxc launch bcio:openwrt gateway -p openwrt && sleep 30 && lxc list
 ````
 
 #### 15. Reboot host system & inherit!
@@ -147,17 +141,23 @@ reboot
 
 ## FINISHED!!
 Find your WebUI in a lan side browser @ 192.168.1.1    
-
+    
+    
+---------------------------------------------------------------------------------    
+    
+    
 ## ProTip 1:
 Enable Luci WebUI on WAN port 80
 ````sh
 lxc exec gateway -- /bin/ash -c '/root/enable-webui-on-wan'
 ````
 
+    
+    
 ## ProTip 2:
 Use as physical network gateway by adding 2nd physical NIC to ovs bridge 'lan'    
 (Substitute 'ens6' for your devices physical port)    
-
+    
 #### Create ifupdown config for physical lan port
 ````sh
 cat <<EOF >/etc/network/interfaces.d/ens6.cfg
@@ -166,13 +166,14 @@ allow-hotplug ens6
 iface ens6 inet manual
 EOF
 ````
-
+    
 #### Add physical lan port to ovs bridge 'lan'
 ````sh
 ovs-vsctl add-port lan ens6
 ````
-
----------------------------------------------------------------------------------
+    
+    
+---------------------------------------------------------------------------------    
 # CREDITS:
   - https://github.com/openwrt
   - https://github.com/mikma/lxd-openwrt
