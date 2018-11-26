@@ -100,7 +100,7 @@ cluster: null
 networks: []
 storage_pools:
 - config:
-    size: 15GB
+    size: 64GB
   description: ""
   name: default
   driver: btrfs
