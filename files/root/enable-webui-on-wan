@@ -1,8 +1,19 @@
 #!/bin/ash
+#################################################################################
+CCIO OpenWRT Script to enable LuCi WebUI on WAN Interface
 
-wan_IP=$(ip address show eth0 | awk -F'[ /]' '/inet /{print $6}')
+WARNING:
+        This is NOT a recommended configuration for security.
+        Please only use this rule if your gateway is on a trusted network.
+
+
+#################################################################################
+# Backup Firewall Config
 cp /etc/config/firewall /root/bak/firewall.original
 
+
+#################################################################################
+# Load LuCi WAN Firewall rule
 echo "
 config redirect
         option target 'DNAT'
@@ -15,10 +26,25 @@ config redirect
         option dest_port '80'
 " >>/etc/config/firewall
 
-rm /usr/bin/enable-webui-on-wan
-mv /root/enable-webui-on-wan /root/bak/
+
+#################################################################################
+# Reload Firewall 
 /etc/init.d/firewall reload 2>/dev/null 1>/dev/null
 
+
+#################################################################################
+# Disable script
+rm /usr/bin/enable-webui-on-wan
+mv /root/enable-webui-on-wan /root/bak/
+
+
+#################################################################################
+# Detect WAN IP
+sleep 5 && wan_IP=$(ip address show eth0 | awk -F'[ /]' '/inet /{print $6}')
+
+
+#################################################################################
+# Echo Disclaimer & URL to Screen
 echo "
             ~~~~~~~~~~~~~~~~~~~~~
 WARNING: 
