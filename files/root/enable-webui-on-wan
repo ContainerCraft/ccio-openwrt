@@ -1,0 +1,36 @@
+#!/bin/ash
+
+wan_IP=$(ip address show eth0 | awk -F'[ /]' '/inet /{print $6}')
+cp /etc/config/firewall /root/bak/firewall.original
+
+echo "
+config redirect
+        option target 'DNAT'
+        option src 'wan'
+        option dest 'lan'
+        option proto 'tcp udp'
+        option src_dport '80'
+        option dest_ip '192.168.1.1'
+        option name 'openwrt-webui'
+        option dest_port '80'
+" >>/etc/config/firewall
+
+rm /usr/bin/enable-webui-on-wan
+mv /root/enable-webui-on-wan /root/bak/
+/etc/init.d/firewall reload
+
+echo "
+            ~~~~~~~~~~~~~~~~~~~~~
+WARNING: 
+    This is not a secure configuration
+    Public access to port 80 is potentially dangerous
+    Only use this configuration in trusted networks
+
+
+  OpenWRT Webui Now accessible at:
+
+  http://${wan_IP}:80/cgi-bin/luci/
+
+
+            ~~~~~~~~~~~~~~~~~~~~~
+"

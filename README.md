@@ -148,7 +148,13 @@ reboot
 ## FINISHED!!
 Find your WebUI in a lan side browser @ 192.168.1.1    
 
-## ProTip:
+## ProTip 1:
+Enable Luci WebUI on WAN port 80
+````sh
+lxc exec gateway -- /bin/ash -c '/root/enable-webui-on-wan'
+````
+
+## ProTip 2:
 Use as physical network gateway by adding 2nd physical NIC to ovs bridge 'lan'    
 (Substitute 'ens6' for your devices physical port)    
 
@@ -166,6 +172,7 @@ EOF
 ovs-vsctl add-port lan ens6
 ````
 
+---------------------------------------------------------------------------------
 # CREDITS:
   - https://github.com/openwrt
   - https://github.com/mikma/lxd-openwrt

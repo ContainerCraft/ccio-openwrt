@@ -62,7 +62,14 @@ unpack() {
 	cat $src_tar | (cd $instroot && tar -xz)
 }
 
+late_commands () {
+	chroot $instroot /bin/ash -c "mkdir /root/bak"
+	chroot $instroot /bin/ash -c "ln /root/enable-webui-on-wan /usr/bin/"
+	chroot $instroot /bin/ash -c "yes 'admin' | passwd"
+}
+
 pack() {
+	late_commands
 	echo Pack rootfs
 	if test -n "$metadata"; then
 		(cd $dir && tar -cz *) > $dst_file
@@ -77,7 +84,6 @@ pack_squashfs() {
 }
 
 disable_root() {
-	chroot $instroot /bin/ash -c "yes 'admin' | passwd"
 	sed -i -e 's/^root::/root:*:/' $instroot/etc/shadow
 }
 
