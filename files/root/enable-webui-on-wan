@@ -17,7 +17,7 @@ config redirect
 
 rm /usr/bin/enable-webui-on-wan
 mv /root/enable-webui-on-wan /root/bak/
-/etc/init.d/firewall reload
+/etc/init.d/firewall reload 2>/dev/null 1>/dev/null
 
 echo "
             ~~~~~~~~~~~~~~~~~~~~~
