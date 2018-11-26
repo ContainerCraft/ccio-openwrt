@@ -149,7 +149,7 @@ Find your WebUI in a lan side browser @ 192.168.1.1
 ## ProTip 1:
 Enable Luci WebUI on WAN port 80
 ````sh
-lxc exec gateway -- /bin/ash -c '/root/enable-webui-on-wan'
+lxc exec gateway -- enable-webui-on-wan'
 ````
 
     
